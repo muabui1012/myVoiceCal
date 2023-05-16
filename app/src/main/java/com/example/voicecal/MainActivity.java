@@ -20,12 +20,16 @@ import com.example.voicecal.Functions;
 
 import java.util.List;
 import java.util.Locale;
+import java.io.*;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private Button changeModeButton;
     ImageButton btn_Nghe;
     EditText edt_View;
+
+    EditText edt_Result;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     Context context = MainActivity.this;
 
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_Nghe = findViewById(R.id.img_btn_Nghe);
         edt_View = findViewById(R.id.edtView);
+        edt_Result = findViewById(R.id.edtResult);
         //btn_NOI = findViewById(R.id.btn_noi);
 
         btn_Nghe.setOnClickListener(new View.OnClickListener() {
@@ -95,15 +100,34 @@ public class MainActivity extends AppCompatActivity {
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String text = result.get(0);
                     text = Functions.Std(text);
-
-
                     edt_View.setText(text);
+                    //edt_View.setText(Functions.cal(text));
+                    String res = Functions.cal(text);
+
+                    edt_Result.setText(res);
+
+                    textToSpeech(edt_Result.getText().toString());
 
                 }
                 break;
             }
 
         }
+    }
+
+    public void  textToSpeech(String text){
+        textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onInit(int status) {
+                if ( status != TextToSpeech.ERROR ){
+                    textToSpeech.setLanguage( new Locale("vi_VN") );
+                    textToSpeech.setSpeechRate((float) 1.5);
+                    textToSpeech.speak(text , TextToSpeech.QUEUE_FLUSH , null);
+
+                }
+            }
+        });
     }
 
     public void openAdvanceMode() {

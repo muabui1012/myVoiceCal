@@ -1,10 +1,25 @@
 package com.example.voicecal;
 
+
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
+
 public class Functions {
 
-    public static int cal(String exp) {
+    public static String cal(String exp) {
+        try{
+            Context context  = Context.enter();
+            context.setOptimizationLevel(-1);
+            Scriptable scriptable = context.initStandardObjects();
+            String finalResult =  context.evaluateString(scriptable,exp,"Javascript",1,null).toString();
+            if(finalResult.endsWith(".0")){
+                finalResult = finalResult.replace(".0","");
+            }
+            return finalResult;
+        }catch (Exception e){
+            return "Err";
+        }
 
-        return 0;
     }
 
     public static String Std(String exp) {
@@ -16,6 +31,8 @@ public class Functions {
         change = change.replace("trừ","-");
         change = change.replace(".","");
         change = change.replace(",",".");
+        change = change.replace(" ","");
+
 
         return change;
     }
