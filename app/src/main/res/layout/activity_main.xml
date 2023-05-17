@@ -6,56 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <Button
+        android:id="@+id/changeModeButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="153dp"
+        android:layout_marginBottom="48dp"
+        android:text="Mở bàn phím" />
+
+    <TextView
+        android:id="@+id/solution_tv"
+        android:layout_width="410dp"
+        android:layout_height="92dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="-213dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/result_tv"
+        android:layout_width="301dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="0"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="50dp" />
+
     <ImageButton
         android:id="@+id/img_btn_Nghe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="119dp"
-        android:layout_marginTop="89dp"
-        app:srcCompat="@drawable/mic" />
-
-    <EditText
-        android:id="@+id/edtView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="0dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name" />
-
-    <Button
-        android:id="@+id/changeModeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="157dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="150dp"
-        android:text="Activity2" />
-
-    <EditText
-        android:id="@+id/edtResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="218dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name" />
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="229dp"
+        android:background="@drawable/roundmic"
+        android:src="@drawable/mic64" />
 
 
 </RelativeLayout>

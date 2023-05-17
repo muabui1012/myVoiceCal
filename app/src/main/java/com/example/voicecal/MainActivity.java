@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.voicecal.Functions;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     EditText edt_View;
 
     EditText edt_Result;
+    TextView solutionTv, resultTv;
+
     private final int REQ_CODE_SPEECH_INPUT = 100;
     Context context = MainActivity.this;
 
@@ -43,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btn_Nghe = findViewById(R.id.img_btn_Nghe);
-        edt_View = findViewById(R.id.edtView);
-        edt_Result = findViewById(R.id.edtResult);
+        solutionTv = findViewById(R.id.solution_tv);
+        resultTv = findViewById(R.id.result_tv);
         //btn_NOI = findViewById(R.id.btn_noi);
 
         btn_Nghe.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 openAdvanceMode();
             }
         });
-
+        textToSpeech("","Bấm vào biểu tượng micro ở giữa màn hình để đọc biểu thức và tôi sẽ tính giúp bạn");
 
     }
 
@@ -99,15 +102,26 @@ public class MainActivity extends AppCompatActivity {
                     List<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String text = result.get(0);
+
+                    if (text.equals("mở rộng") || text.equals("mở bàn phím") || text.equals("Mở rộng") || text.equals("Mở bàn phím")) {
+                        openAdvanceMode();
+                        return;
+                    }
+
                     text = Functions.Std(text);
-                    edt_View.setText(text);
+
+                    solutionTv.setText(text);
                     //edt_View.setText(Functions.cal(text));
+
                     String res = Functions.cal(text);
 
-                    edt_Result.setText(res);
+                    resultTv.setText(res);
 
-                    textToSpeech(edt_Result.getText().toString());
-
+                    if (!res.equals("Err")) {
+                        textToSpeech("Kết quả là", resultTv.getText().toString());
+                    } else {
+                        textToSpeech("Tôi không hiểu, bạn vui lòng nhập lại", "");
+                    }
                 }
                 break;
             }
@@ -115,15 +129,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void  textToSpeech(String text){
+    public void  textToSpeech(String message, String text){
         textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onInit(int status) {
                 if ( status != TextToSpeech.ERROR ){
                     textToSpeech.setLanguage( new Locale("vi_VN") );
-                    textToSpeech.setSpeechRate((float) 1.5);
-                    textToSpeech.speak(text , TextToSpeech.QUEUE_FLUSH , null);
+                    textToSpeech.setSpeechRate((float) 1);
+
+                    textToSpeech.speak(message + text , TextToSpeech.QUEUE_FLUSH , null);
 
                 }
             }

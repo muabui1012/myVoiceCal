@@ -1,16 +1,27 @@
 package com.example.voicecal;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
+
+import java.util.List;
+import java.util.Locale;
 
 
 public class AdvanceMode extends AppCompatActivity implements View.OnClickListener{
@@ -22,6 +33,11 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
     MaterialButton buttonAC,buttonDot;
 
     Button changeMode;
+    ImageButton btn_Nghe;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
+
+    TextToSpeech textToSpeech;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +75,36 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
             }
         });
 
+        btn_Nghe = findViewById(R.id.img_btn_Nghe);
+        btn_Nghe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                speech_TO_TEXT();
+            }
+        });
 
+        textToSpeech("Đã chuyển sang chế độ mở rộng");
+
+
+    }
+
+    public void speech_TO_TEXT(){
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault() );
+
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Đang nghe  --__-- ");
+
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    "Sorry! Your device doesn\\'t support speech input" ,
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     void assignId(MaterialButton btn,int id){
@@ -86,6 +131,7 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
         }
         if(buttonText.equals("=")){
             solutionTv.setText(resultTv.getText());
+            textToSpeech(resultTv.getText().toString());
             return;
         }
         if(buttonText.equals("C")){
@@ -101,6 +147,50 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
             resultTv.setText(finalResult);
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && data != null) {
+
+                    List<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String text = result.get(0);
+                    text = Functions.Std(text);
+                    solutionTv.setText(text);
+//                    String res = getResult(text);
+//
+//                    if(!res.equals("Err")){
+//                        resultTv.setText(res);
+//                    } else {
+//                        resultTv.setText("Syntax Error");
+//                    }
+//                    textToSpeech(resultTv.getText().toString());
+
+                }
+                break;
+            }
+
+        }
+    }
+
+    public void textToSpeech(String text){
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onInit(int status) {
+                if ( status != TextToSpeech.ERROR ){
+                    textToSpeech.setLanguage( new Locale("vi_VN") );
+                    textToSpeech.setSpeechRate((float) 1);
+                    textToSpeech.speak(text , TextToSpeech.QUEUE_FLUSH , null);
+
+                }
+            }
+        });
     }
 
     String getResult(String data){

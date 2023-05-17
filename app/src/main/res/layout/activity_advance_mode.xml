@@ -6,44 +6,58 @@
     android:layout_height="match_parent"
     tools:context=".AdvanceMode">
 
-
-    <Button
-        android:id="@+id/changeMode"
+    <ImageButton
+        android:id="@+id/img_btn_Nghe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="322dp"
-        android:layout_marginTop="33dp"
-        android:text="Button" />
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="271dp"
+        android:layout_marginEnd="266dp"
+        app:srcCompat="@drawable/mic" />
+
+    <Button
+        android:id="@+id/changeMode"
+        android:layout_width="181dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="287dp"
+        android:text="Đóng bàn phím" />
 
     <TextView
         android:id="@+id/solution_tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="376dp"
+        android:layout_height="113dp"
         android:layout_above="@id/result_tv"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="4dp"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="32dp" />
 
+
     <TextView
         android:id="@+id/result_tv"
-        android:layout_width="match_parent"
+        android:layout_width="374dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/buttons_layout"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="134dp"
         android:text="0"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="64dp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
