@@ -255,7 +255,7 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
         if (text.equals("C")) {
             String sol = solutionTv.getText().toString();
             if (sol.length() != 0) {
-                sol = sol.substring(0,sol.length()-2);
+                sol = sol.substring(0,sol.length()-1);
                 solutionTv.setText(sol);
             }
             return "";
