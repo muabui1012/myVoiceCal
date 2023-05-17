@@ -20,6 +20,7 @@ import com.google.android.material.button.MaterialButton;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,7 +33,7 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
     MaterialButton button0,button1,button2,button3,button4,button5,button6,button7,button8,button9;
     MaterialButton buttonAC,buttonDot;
 
-    Button changeMode;
+    ImageButton changeMode;
     ImageButton btn_Nghe;
     private final int REQ_CODE_SPEECH_INPUT = 100;
 
@@ -130,14 +131,16 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
             return;
         }
         if(buttonText.equals("=")){
-            solutionTv.setText(resultTv.getText());
-            textToSpeech(resultTv.getText().toString());
+            solutionTv.setText("");
+            //dataToCalculate = "";
+            textToSpeech("Kết quả là " + resultTv.getText().toString());
             return;
         }
-        if(buttonText.equals("C")){
+        if(buttonText.equals("C") && (!solutionTv.getText().toString().equals(""))){
             dataToCalculate = dataToCalculate.substring(0,dataToCalculate.length()-1);
         }else{
-            dataToCalculate = dataToCalculate+buttonText;
+            if (!buttonText.equals("C"))
+                dataToCalculate = dataToCalculate+buttonText;
         }
         solutionTv.setText(dataToCalculate);
 
@@ -162,6 +165,8 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
                     String text = result.get(0);
                     text = Functions.Std(text);
                     solutionTv.setText(text);
+                    String res = getResult(text);
+                    resultTv.setText(res);
 //                    String res = getResult(text);
 //
 //                    if(!res.equals("Err")){
@@ -199,6 +204,7 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
             context.setOptimizationLevel(-1);
             Scriptable scriptable = context.initStandardObjects();
             String finalResult =  context.evaluateString(scriptable,data,"Javascript",1,null).toString();
+            finalResult = rounddecimal(finalResult);
             if(finalResult.endsWith(".0")){
                 finalResult = finalResult.replace(".0","");
             }
@@ -206,6 +212,14 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
         }catch (Exception e){
             return "Err";
         }
+    }
+
+    String rounddecimal(String data) {
+        float n = Float.parseFloat(data);
+        DecimalFormat df = new DecimalFormat("#.#####");
+        df.format(n);
+        return Float.toString(n);
+
     }
 
 }

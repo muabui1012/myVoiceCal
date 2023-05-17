@@ -32,6 +32,16 @@ public class Functions {
         change = change.replace(".","");
         change = change.replace(",",".");
         change = change.replace(" ","");
+        change = change.replace("một","1");
+        change = change.replace("hai","2");
+        change = change.replace("ba","3");
+        change = change.replace("bốn","4");
+        change = change.replace("năm","5");
+        change = change.replace("sáu","6");
+        change = change.replace("bảy","7");
+        change = change.replace("tám","8");
+        change = change.replace("chín","9");
+
 
 
         return change;

@@ -8,24 +8,34 @@
 
     <ImageButton
         android:id="@+id/img_btn_Nghe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="138dp"
+        android:layout_height="115dp"
+        android:layout_above="@+id/buttons_layout"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="271dp"
-        android:layout_marginEnd="266dp"
-        app:srcCompat="@drawable/mic" />
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="242dp"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/roundmic1"
+        android:src="@drawable/mic64" />
 
-    <Button
+
+    <ImageButton
         android:id="@+id/changeMode"
-        android:layout_width="181dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="93dp"
+        android:layout_above="@+id/buttons_layout"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="230dp"
-        android:layout_marginTop="287dp"
-        android:text="Đóng bàn phím" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="264dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="29dp"
+        android:background="@drawable/roundmic1"
+        android:src="@drawable/nokeyboard48"
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/solution_tv"

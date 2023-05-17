@@ -26,7 +26,7 @@ import java.io.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button changeModeButton;
+    private ImageButton changeModeButton;
     ImageButton btn_Nghe;
     EditText edt_View;
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 openAdvanceMode();
             }
         });
-        textToSpeech("","Bấm vào biểu tượng micro ở giữa màn hình để đọc biểu thức và tôi sẽ tính giúp bạn");
+        textToSpeech("","Bấm vào biểu tượng micro ở giữa màn hình để đọc biểu thức và tôi sẽ tính giúp bạn. Bấm vào biểu tượng bàn phím để hiện bàn phím");
 
     }
 
