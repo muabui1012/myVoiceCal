@@ -136,6 +136,12 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
             //dataToCalculate = "";
             String sol = solutionTv.getText().toString();
             sol = Functions.Std(sol);
+            if (sol.equals("ERR")) {
+                textToSpeech("Tôi không hiểu, vui lòng nhập lại.");
+                solutionTv.setText("");
+                resultTv.setText("");
+                return;
+            }
             sol = getResult(sol);
             resultTv.setText(sol);
             textToSpeech("Kết quả là " + resultTv.getText().toString());
@@ -169,6 +175,11 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
                     List<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String text = result.get(0);
+                    if (text.equals("Tắt bàn phím") || text.equals("tắt bàn phím")) {
+                        openMain();
+                        return;
+                    }
+
                     text = Functions.Std(text);
 
                     String textbutton = "";
@@ -254,6 +265,21 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
             return "";
         }
 
+        if (text.equals("=")) {
+            String sol = solutionTv.getText().toString();
+            sol = Functions.Std(sol);
+            if (sol.equals("ERR")) {
+                textToSpeech("Tôi không hiểu, vui lòng nhập lại.");
+                solutionTv.setText("");
+                resultTv.setText("");
+                return "";
+            }
+            sol = getResult(sol);
+            resultTv.setText(sol);
+            textToSpeech("Kết quả là " + resultTv.getText().toString());
+            solutionTv.setText("");
+            return "";
+        }
 
 
         if (text.equals("0")) return "0";

@@ -6,20 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".AdvanceMode">
 
+
     <ImageButton
         android:id="@+id/img_btn_Nghe"
-        android:layout_width="138dp"
-        android:layout_height="115dp"
+        android:layout_width="197dp"
+        android:layout_height="162dp"
         android:layout_above="@+id/buttons_layout"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="31dp"
-        android:layout_marginEnd="242dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="189dp"
+        android:layout_marginBottom="22dp"
         android:background="@drawable/roundmic1"
         android:src="@drawable/mic64" />
-
 
     <ImageButton
         android:id="@+id/changeMode"
@@ -29,25 +29,25 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="264dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="201dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="58dp"
         android:background="@drawable/roundmic1"
         android:src="@drawable/nokeyboard48"
         android:textSize="15dp" />
 
     <TextView
         android:id="@+id/solution_tv"
-        android:layout_width="376dp"
-        android:layout_height="113dp"
+        android:layout_width="370dp"
+        android:layout_height="73dp"
         android:layout_above="@id/result_tv"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentEnd="false"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="17dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="-5dp"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="32dp" />
@@ -55,19 +55,19 @@
 
     <TextView
         android:id="@+id/result_tv"
-        android:layout_width="374dp"
-        android:layout_height="wrap_content"
+        android:layout_width="375dp"
+        android:layout_height="61dp"
         android:layout_above="@id/buttons_layout"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="134dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="207dp"
         android:text="0"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
-        android:textSize="64dp" />
+        android:textSize="54dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

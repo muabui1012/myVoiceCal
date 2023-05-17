@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 openAdvanceMode();
             }
         });
-        textToSpeech("","Bấm vào biểu tượng micro ở giữa màn hình để đọc biểu thức và tôi sẽ tính giúp bạn. Bấm vào biểu tượng bàn phím để hiện bàn phím");
+        textToSpeech("","Bấm vào biểu tượng micro ở giữa màn hình để đọc biểu thức và tôi sẽ tính giúp bạn. Bấm vào biểu tượng bàn phím ở phía dưới để hiện bàn phím");
 
     }
 
