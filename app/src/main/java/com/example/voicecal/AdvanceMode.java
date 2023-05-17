@@ -95,9 +95,9 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault() );
+        //intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault() );
 
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Đang nghe  --__-- ");
+        //intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Đang nghe  --__-- ");
 
         try {
             startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
@@ -106,6 +106,7 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
                     "Sorry! Your device doesn\\'t support speech input" ,
                     Toast.LENGTH_SHORT).show();
         }
+        //speech_TO_TEXT();
     }
 
     void assignId(MaterialButton btn,int id){
@@ -131,9 +132,14 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
             return;
         }
         if(buttonText.equals("=")){
-            solutionTv.setText("");
+
             //dataToCalculate = "";
+            String sol = solutionTv.getText().toString();
+            sol = Functions.Std(sol);
+            sol = getResult(sol);
+            resultTv.setText(sol);
             textToSpeech("Kết quả là " + resultTv.getText().toString());
+            solutionTv.setText("");
             return;
         }
         if(buttonText.equals("C") && (!solutionTv.getText().toString().equals(""))){
@@ -164,9 +170,19 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String text = result.get(0);
                     text = Functions.Std(text);
-                    solutionTv.setText(text);
-                    String res = getResult(text);
-                    resultTv.setText(res);
+
+                    String textbutton = "";
+                    for (int i=0; i < text.length(); i++) {
+                        String ch = String.valueOf(text.charAt(i));
+                        textbutton = textbutton + speechToButton(ch);
+                    }
+                    String sol = solutionTv.getText().toString();
+                    String finalsol = sol +textbutton;
+                    solutionTv.setText(finalsol);
+
+
+                    //String res = getResult(text);
+                    //resultTv.setText(res);
 //                    String res = getResult(text);
 //
 //                    if(!res.equals("Err")){
@@ -182,6 +198,7 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
 
         }
     }
+
 
     public void textToSpeech(String text){
         textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -221,5 +238,46 @@ public class AdvanceMode extends AppCompatActivity implements View.OnClickListen
         return Float.toString(n);
 
     }
+
+    String speechToButton(String text) {
+
+        if (text.equals("C")) {
+            String sol = solutionTv.getText().toString();
+            if (sol.length() != 0) {
+                sol = sol.substring(0,sol.length()-2);
+                solutionTv.setText(sol);
+            }
+            return "";
+        }
+        if (text.equals("A")) {
+            solutionTv.setText("");
+            return "";
+        }
+
+
+
+        if (text.equals("0")) return "0";
+        if (text.equals("1")) return "1";
+        if (text.equals("2")) return "2";
+        if (text.equals("3")) return "3";
+        if (text.equals("4")) return "4";
+        if (text.equals("5")) return "5";
+        if (text.equals("6")) return "6";
+        if (text.equals("7")) return "7";
+        if (text.equals("8")) return "8";
+        if (text.equals("9")) return "9";
+        if (text.equals("(")) return "(";
+        if (text.equals(")")) return ")";
+        if (text.equals(".")) return ".";
+        if (text.equals("+")) return "+";
+        if (text.equals("-")) return "-";
+        if (text.equals("*")) return "*";
+        if (text.equals("/")) return "/";
+
+
+
+        return "";
+    }
+
 
 }
