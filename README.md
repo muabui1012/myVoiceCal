@@ -1,8 +1,7 @@
 This is an Android application for calculating with voice recognition.
 
 How to run: 
-    Clone the repo and open with Android Studio
-    Run
+    Clone the repo and open with Android Studio and run.
 
 Screenshots:
 
